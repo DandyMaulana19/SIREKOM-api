@@ -16,9 +16,9 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/all", async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.countDocuments();
     res.json(users);
   } catch (e) {
     res.status(500).json({ message: "Server error", error: e.message });

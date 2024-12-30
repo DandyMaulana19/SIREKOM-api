@@ -11,6 +11,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/participants", async (req, res) => {
+  try {
+    const lomba = await Lomba.find().select("participants");
+    res.json(lomba);
+  } catch (e) {
+    res.status(500).json({ message: "Server error", error: e.message });
+  }
+});
+
+router.get("/all", async (req, res) => {
+  try {
+    const lomba = await Lomba.countDocuments();
+    res.json(lomba);
+  } catch (e) {
+    res.status(500).json({ message: "Server error", error: e.message });
+  }
+});
+
 router.post("/", async (req, res) => {
   const { title, registrationDate, description, participants } = req.body;
 
